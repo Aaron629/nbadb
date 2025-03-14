@@ -2,13 +2,13 @@ import requests
 import sys,os
 import django
 django.setup()
-sys.path.append('C:/Users/許皓倫/Downloads/interview/nbadb/nbadb')
+sys.path.append('C:/Users/nbadb/nbadb/nbadb')
 os.environ["DJANGO_SETTINGS_MODULE"]="nbadb.settings"
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from nbadata.models import Nba_news 
-import time
+import time,datetime
 
 s = Service("chromedriver.exe")
 driver = webdriver.Chrome(service=s)
@@ -35,8 +35,5 @@ while target_count > len(title_items):
         memo_items.append(k.text)
         Nba_news.objects.update_or_create(defaults={'title':j.text[4:]},memo=k.text,ldate=up_time,luser=up_user,iobool=True)
     
-      
-
-print(memo_items)
-print(f'總共:{len(items)}筆資料')
+    
 
